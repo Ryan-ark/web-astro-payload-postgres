@@ -1,4 +1,6 @@
-import { e as createComponent, m as maybeRenderHead, g as addAttribute, r as renderTemplate, h as createAstro } from './astro/server_D9j1HrlC.mjs';
+import { e as createComponent, m as maybeRenderHead, g as addAttribute, r as renderTemplate, h as createAstro } from './astro/server_BahSWGGF.mjs';
+import 'piccolore';
+import 'clsx';
 
 const $$Astro = createAstro();
 const $$ProductCard = createComponent(($$result, $$props, $$slots) => {

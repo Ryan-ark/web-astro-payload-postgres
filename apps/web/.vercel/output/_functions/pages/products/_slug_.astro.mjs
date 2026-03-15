@@ -1,6 +1,7 @@
-import { e as createComponent, k as renderComponent, r as renderTemplate, h as createAstro, m as maybeRenderHead, g as addAttribute } from '../../chunks/astro/server_D9j1HrlC.mjs';
-import { $ as $$BaseLayout, a as $$Container } from '../../chunks/BaseLayout_Ck2omhya.mjs';
-import { a as getPublishedProductBySlug } from '../../chunks/product.service_ChcCuGvR.mjs';
+import { e as createComponent, k as renderComponent, r as renderTemplate, h as createAstro, m as maybeRenderHead, g as addAttribute } from '../../chunks/astro/server_BahSWGGF.mjs';
+import 'piccolore';
+import { $ as $$BaseLayout, a as $$Container } from '../../chunks/BaseLayout_C8c35dbz.mjs';
+import { a as getPublishedProductBySlug } from '../../chunks/product.service_k3D27VUR.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const $$Astro = createAstro();

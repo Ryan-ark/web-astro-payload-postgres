@@ -1,7 +1,8 @@
-import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_D9j1HrlC.mjs';
-import { $ as $$BaseLayout, a as $$Container } from '../chunks/BaseLayout_Ck2omhya.mjs';
-import { $ as $$ProductCard } from '../chunks/ProductCard_B9Pv_5IL.mjs';
-import { b as getPublishedProducts } from '../chunks/product.service_ChcCuGvR.mjs';
+import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_BahSWGGF.mjs';
+import 'piccolore';
+import { $ as $$BaseLayout, a as $$Container } from '../chunks/BaseLayout_C8c35dbz.mjs';
+import { $ as $$ProductCard } from '../chunks/ProductCard_fhPkQ96X.mjs';
+import { b as getPublishedProducts } from '../chunks/product.service_k3D27VUR.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$Index = createComponent(async ($$result, $$props, $$slots) => {

@@ -5,7 +5,7 @@ const publicEnvSchema = z.object({
   PUBLIC_SITE_URL: z.url()
 });
 const publicEnv = publicEnvSchema.parse({
-  PUBLIC_CMS_URL: "http://localhost:3001",
+  PUBLIC_CMS_URL: "http://127.0.0.1:3001",
   PUBLIC_SITE_URL: "http://localhost:4321"
 });
 

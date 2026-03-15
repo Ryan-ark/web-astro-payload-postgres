@@ -10,39 +10,43 @@ const [products, categories] = await Promise.all([getPublishedProducts(), getCat
 ---
 
 <BaseLayout title="Acme Stack | Astro + Payload CRUD">
-  <section class="pb-16 pt-16 text-white sm:pb-24 sm:pt-24">
-    <Container class="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-      <div class="space-y-8">
-        <p class="text-sm font-semibold uppercase tracking-[0.35em] text-amber-300">Sample CRUD foundation</p>
-        <div class="space-y-5">
-          <h1 class="max-w-4xl text-5xl font-semibold leading-none text-balance sm:text-6xl">
-            Astro frontend. Payload CMS. PostgreSQL. Built to scale cleanly.
-          </h1>
-          <p class="max-w-2xl text-lg leading-8 text-slate-300">
-            This starter shows a code-first CMS backend, an Astro storefront, and a structure optimized for AI-readable implementation.
-          </p>
+  <section class="pb-16 pt-16 sm:pb-24 sm:pt-24">
+    <Container>
+      <div class="overflow-hidden rounded-[2.25rem] border border-white/10 bg-slate-950/78 px-6 py-10 text-white shadow-[0_40px_120px_rgba(15,23,42,0.34)] backdrop-blur md:px-10 md:py-12">
+        <div class="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <div class="space-y-8">
+            <p class="text-sm font-semibold uppercase tracking-[0.35em] text-amber-300">Sample CRUD foundation</p>
+            <div class="space-y-5">
+              <h1 class="max-w-4xl text-5xl font-semibold leading-none text-balance text-white sm:text-6xl">
+                Astro frontend. Payload CMS. PostgreSQL. Built to scale cleanly.
+              </h1>
+              <p class="max-w-2xl text-lg leading-8 text-slate-200">
+                This starter shows a code-first CMS backend, an Astro storefront, and a structure optimized for AI-readable implementation.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <ButtonLink href="/products">Browse products</ButtonLink>
+              <ButtonLink href={`${import.meta.env.PUBLIC_CMS_URL}/admin`} variant="secondary">Open CMS</ButtonLink>
+            </div>
+          </div>
+          <div class="rounded-[2rem] border border-white/12 bg-white/8 p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur">
+            <p class="text-sm uppercase tracking-[0.25em] text-slate-300">Live content model</p>
+            <dl class="mt-6 grid gap-5">
+              <div>
+                <dt class="text-slate-300">Categories</dt>
+                <dd class="mt-1 text-3xl font-semibold text-white">{categories.length}</dd>
+              </div>
+              <div>
+                <dt class="text-slate-300">Published products</dt>
+                <dd class="mt-1 text-3xl font-semibold text-white">{products.length}</dd>
+              </div>
+              <div>
+                <dt class="text-slate-300">Delivery model</dt>
+                <dd class="mt-1 text-lg text-slate-100">Astro on Vercel, Payload on Vercel, Neon Postgres</dd>
+              </div>
+            </dl>
+          </div>
         </div>
-        <div class="flex flex-wrap gap-4">
-          <ButtonLink href="/products">Browse products</ButtonLink>
-          <ButtonLink href={`${import.meta.env.PUBLIC_CMS_URL}/admin`} variant="secondary">Open CMS</ButtonLink>
-        </div>
-      </div>
-      <div class="rounded-[2rem] border border-white/10 bg-white/8 p-8 backdrop-blur">
-        <p class="text-sm uppercase tracking-[0.25em] text-slate-400">Live content model</p>
-        <dl class="mt-6 grid gap-5">
-          <div>
-            <dt class="text-slate-400">Categories</dt>
-            <dd class="mt-1 text-3xl font-semibold">{categories.length}</dd>
-          </div>
-          <div>
-            <dt class="text-slate-400">Published products</dt>
-            <dd class="mt-1 text-3xl font-semibold">{products.length}</dd>
-          </div>
-          <div>
-            <dt class="text-slate-400">Delivery model</dt>
-            <dd class="mt-1 text-lg">Astro on Vercel, Payload on Vercel, Neon Postgres</dd>
-          </div>
-        </dl>
       </div>
     </Container>
   </section>
