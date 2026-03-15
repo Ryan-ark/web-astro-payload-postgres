@@ -1,4 +1,4 @@
-# Astro + Payload + PostgreSQL Monorepo
+# Astro + Payload + PostgreSQL Monorepo 
 
 Sample CRUD application built as a monorepo with:
 
