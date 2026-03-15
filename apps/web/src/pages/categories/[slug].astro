@@ -1,49 +1,53 @@
 ---
 import Container from '@/components/layout/Container.astro'
-import { getCategories } from '@/features/categories/services/category.service'
+import { getCategoryBySlug } from '@/features/categories/services/category.service'
 import ProductCard from '@/features/products/components/ProductCard.astro'
 import { getPublishedProductsByCategory } from '@/features/products/services/product.service'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 
-export async function getStaticPaths() {
-  const categories = await getCategories()
+export const prerender = false
 
-  return Promise.all(
-    categories.map(async (category) => ({
-      params: { slug: category.slug },
-      props: {
-        category,
-        products: await getPublishedProductsByCategory(category.slug),
-      },
-    })),
-  )
-}
+const { slug } = Astro.params
+const category = slug ? await getCategoryBySlug(slug) : null
+const products = category ? await getPublishedProductsByCategory(category.slug) : []
 
-const { category, products } = Astro.props
+Astro.response.status = category ? 200 : 404
 ---
 
-<BaseLayout title={`Category: ${category.name}`}>
-  <section class="pb-16 pt-16 sm:pt-20">
-    <Container class="space-y-8">
-      <div class="space-y-3">
-        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Category view</p>
-        <h1 class="text-4xl font-semibold capitalize text-slate-950">{category.name}</h1>
-        <p class="max-w-2xl text-slate-600">
-          Products filtered by category from the Payload relationship field.
-        </p>
-      </div>
+<BaseLayout title={category ? `Category: ${category.name}` : 'Category not found'}>
+  {
+    category ? (
+      <section class="pb-16 pt-16 sm:pt-20">
+        <Container class="space-y-8">
+          <div class="space-y-3">
+            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Category view</p>
+            <h1 class="text-4xl font-semibold capitalize text-slate-950">{category.name}</h1>
+            <p class="max-w-2xl text-slate-600">
+              Products filtered by category from the Payload relationship field.
+            </p>
+          </div>
 
-      {
-        products.length > 0 ? (
-          <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {products.map((product) => <ProductCard product={product} />)}
-          </div>
-        ) : (
+          {
+            products.length > 0 ? (
+              <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {products.map((product) => <ProductCard product={product} />)}
+              </div>
+            ) : (
+              <div class="rounded-[1.5rem] border border-dashed border-slate-300 bg-white p-8 text-slate-600">
+                No published products were found for this category.
+              </div>
+            )
+          }
+        </Container>
+      </section>
+    ) : (
+      <section class="pb-16 pt-16 sm:pt-20">
+        <Container>
           <div class="rounded-[1.5rem] border border-dashed border-slate-300 bg-white p-8 text-slate-600">
-            No published products were found for this category.
+            This category is not available.
           </div>
-        )
-      }
-    </Container>
-  </section>
+        </Container>
+      </section>
+    )
+  }
 </BaseLayout>
