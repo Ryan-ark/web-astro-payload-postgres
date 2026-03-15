@@ -1,0 +1,35 @@
+---
+import Footer from '@/components/layout/Footer.astro'
+import Header from '@/components/layout/Header.astro'
+import '@/styles/global.css'
+
+type Props = {
+  title: string
+  description?: string
+}
+
+const { title, description = 'Sample CRUD app built with Astro, Payload, Tailwind, and PostgreSQL.' } =
+  Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="min-h-screen bg-[var(--surface)] text-slate-950">
+    <div class="relative isolate overflow-hidden">
+      <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[30rem] bg-[linear-gradient(180deg,#020617_0%,#0f172a_38%,#1e293b_62%,rgba(28,37,54,0.18)_82%,transparent_100%)]"></div>
+      <div class="pointer-events-none absolute left-[-8rem] top-20 -z-10 h-72 w-72 rounded-full bg-amber-400/12 blur-3xl"></div>
+      <div class="pointer-events-none absolute right-[-10rem] top-24 -z-10 h-80 w-80 rounded-full bg-sky-400/10 blur-3xl"></div>
+      <Header />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

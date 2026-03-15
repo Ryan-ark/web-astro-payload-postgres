@@ -1,0 +1,39 @@
+---
+import type { ProductCardModel } from '@/features/products/types/product.types'
+
+type Props = {
+  product: ProductCardModel
+}
+
+const { product } = Astro.props
+---
+
+<article class="group overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+  <a href={`/products/${product.slug}`} class="block">
+    <img
+      src={product.imageUrl}
+      alt={product.title}
+      class="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+      loading="lazy"
+    />
+  </a>
+  <div class="space-y-4 p-6">
+    <div class="flex items-center justify-between gap-4">
+      <a
+        href={`/categories/${product.categorySlug}`}
+        class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
+      >
+        {product.categoryName}
+      </a>
+      <span class="rounded-full bg-slate-950 px-3 py-1 text-sm font-semibold text-white">
+        ${product.price}
+      </span>
+    </div>
+    <div class="space-y-2">
+      <h3 class="text-xl font-semibold text-slate-950">
+        <a href={`/products/${product.slug}`}>{product.title}</a>
+      </h3>
+      <p class="text-sm leading-6 text-slate-600">{product.summary}</p>
+    </div>
+  </div>
+</article>

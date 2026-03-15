@@ -1,0 +1,49 @@
+---
+import Container from '@/components/layout/Container.astro'
+import { getPublishedProductBySlug } from '@/features/products/services/product.service'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+const slug = Astro.params.slug
+
+if (!slug) {
+  return Astro.redirect('/products')
+}
+
+const product = await getPublishedProductBySlug(slug)
+
+if (!product) {
+  return Astro.redirect('/404')
+}
+---
+
+<BaseLayout title={`${product.title} | Products`} description={product.summary}>
+  <section class="pb-16 pt-16 sm:pt-20">
+    <Container class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+      <img
+        src={product.imageUrl}
+        alt={product.title}
+        class="h-full max-h-[36rem] w-full rounded-[2rem] object-cover shadow-xl"
+      />
+
+      <div class="space-y-6">
+        <a
+          class="inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-slate-500"
+          href={`/categories/${product.categorySlug}`}
+        >
+          {product.categoryName}
+        </a>
+        <div class="space-y-4">
+          <h1 class="text-4xl font-semibold text-slate-950">{product.title}</h1>
+          <p class="text-lg leading-8 text-slate-600">{product.summary}</p>
+        </div>
+        <div class="inline-flex rounded-full bg-slate-950 px-4 py-2 text-lg font-semibold text-white">
+          ${product.price}
+        </div>
+        <div class="rounded-[1.5rem] bg-white p-8 shadow-sm">
+          <h2 class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Description</h2>
+          <p class="mt-4 whitespace-pre-line text-base leading-8 text-slate-700">{product.description}</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

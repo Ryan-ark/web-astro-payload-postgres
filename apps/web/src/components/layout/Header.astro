@@ -1,0 +1,14 @@
+---
+import { routes } from '@acme/shared/constants/routes'
+import Container from '@/components/layout/Container.astro'
+---
+
+<header class="border-b border-white/10 bg-slate-950 text-white">
+  <Container class="flex items-center justify-between py-5">
+    <a class="text-lg font-semibold uppercase tracking-[0.2em]" href={routes.home}>Acme Stack</a>
+    <nav class="flex items-center gap-6 text-sm text-slate-300">
+      <a class="transition hover:text-white" href={routes.products}>Products</a>
+      <a class="transition hover:text-white" href={`${import.meta.env.PUBLIC_CMS_URL}/admin`}>CMS</a>
+    </nav>
+  </Container>
+</header>

@@ -1,0 +1,12 @@
+{
+  "name": "@acme/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./constants/routes": "./src/constants/routes.ts",
+    "./constants/env": "./src/constants/env.ts",
+    "./product/product.types": "./src/product/product.types.ts",
+    "./category/category.types": "./src/category/category.types.ts"
+  }
+}

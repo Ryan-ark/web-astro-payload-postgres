@@ -1,0 +1,30 @@
+{
+  "name": "astro-payload-postgres-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.8.1",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "node -e \"console.log('Run `pnpm dev` inside apps/cms and apps/web in separate terminals.')\"",
+    "dev:web": "node -e \"console.log('Run `pnpm dev` from apps/web.')\"",
+    "dev:cms": "node -e \"console.log('Run `pnpm dev` from apps/cms.')\"",
+    "build": "node -e \"console.log('Run `pnpm build` from apps/cms and apps/web.')\"",
+    "build:web": "node -e \"console.log('Run `pnpm build` from apps/web.')\"",
+    "build:cms": "node -e \"console.log('Run `pnpm build` from apps/cms.')\"",
+    "lint": "node -e \"console.log('Run `pnpm lint` from apps/cms and apps/web.')\"",
+    "lint:web": "node -e \"console.log('Run `pnpm lint` from apps/web.')\"",
+    "lint:cms": "node -e \"console.log('Run `pnpm lint` from apps/cms.')\"",
+    "typecheck": "node -e \"console.log('Run `pnpm typecheck` from apps/cms and apps/web.')\"",
+    "typecheck:web": "node -e \"console.log('Run `pnpm typecheck` from apps/web.')\"",
+    "typecheck:cms": "node -e \"console.log('Run `pnpm typecheck` from apps/cms.')\"",
+    "seed": "node -e \"console.log('Run `pnpm seed` from apps/cms.')\"",
+    "cms:migrate": "node -e \"console.log('Run `pnpm migrate` from apps/cms.')\"",
+    "cms:migrate:create": "node -e \"console.log('Run `pnpm migrate:create` from apps/cms.')\"",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:reset": "docker compose down -v",
+    "db:logs": "docker compose logs -f postgres"
+  }
+}

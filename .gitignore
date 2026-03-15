@@ -1,0 +1,15 @@
+node_modules
+.pnpm
+.pnpm-store
+.turbo
+.astro
+.next
+dist
+build
+.env
+.env.local
+.env.development.local
+.env.production.local
+coverage
+apps/cms/src/payload-types.ts
+apps/cms/src/payload-generated.schema.ts

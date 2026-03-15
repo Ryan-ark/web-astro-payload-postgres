@@ -1,0 +1,40 @@
+{
+  "name": "@acme/cms",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack --port 3001",
+    "build": "next build",
+    "start": "next start --port 3001",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "vercel-build": "pnpm run migrate && pnpm run build",
+    "seed": "tsx src/scripts/seed.ts",
+    "payload": "payload",
+    "migrate": "payload migrate",
+    "migrate:create": "payload migrate:create",
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.5.17",
+    "@payloadcms/db-postgres": "^3.61.1",
+    "@payloadcms/next": "^3.61.1",
+    "dotenv": "^16.6.1",
+    "next": "15.4.11",
+    "payload": "^3.61.1",
+    "pg": "^8.16.3",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "split2": "^4.2.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}

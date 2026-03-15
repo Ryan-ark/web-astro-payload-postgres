@@ -1,0 +1,75 @@
+---
+import ButtonLink from '@/components/common/ButtonLink.astro'
+import Container from '@/components/layout/Container.astro'
+import ProductCard from '@/features/products/components/ProductCard.astro'
+import { getCategories } from '@/features/categories/services/category.service'
+import { getPublishedProducts } from '@/features/products/services/product.service'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+const [products, categories] = await Promise.all([getPublishedProducts(), getCategories()])
+---
+
+<BaseLayout title="Acme Stack | Astro + Payload CRUD">
+  <section class="pb-16 pt-16 text-white sm:pb-24 sm:pt-24">
+    <Container class="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+      <div class="space-y-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.35em] text-amber-300">Sample CRUD foundation</p>
+        <div class="space-y-5">
+          <h1 class="max-w-4xl text-5xl font-semibold leading-none text-balance sm:text-6xl">
+            Astro frontend. Payload CMS. PostgreSQL. Built to scale cleanly.
+          </h1>
+          <p class="max-w-2xl text-lg leading-8 text-slate-300">
+            This starter shows a code-first CMS backend, an Astro storefront, and a structure optimized for AI-readable implementation.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <ButtonLink href="/products">Browse products</ButtonLink>
+          <ButtonLink href={`${import.meta.env.PUBLIC_CMS_URL}/admin`} variant="secondary">Open CMS</ButtonLink>
+        </div>
+      </div>
+      <div class="rounded-[2rem] border border-white/10 bg-white/8 p-8 backdrop-blur">
+        <p class="text-sm uppercase tracking-[0.25em] text-slate-400">Live content model</p>
+        <dl class="mt-6 grid gap-5">
+          <div>
+            <dt class="text-slate-400">Categories</dt>
+            <dd class="mt-1 text-3xl font-semibold">{categories.length}</dd>
+          </div>
+          <div>
+            <dt class="text-slate-400">Published products</dt>
+            <dd class="mt-1 text-3xl font-semibold">{products.length}</dd>
+          </div>
+          <div>
+            <dt class="text-slate-400">Delivery model</dt>
+            <dd class="mt-1 text-lg">Astro on Vercel, Payload on Vercel, Neon Postgres</dd>
+          </div>
+        </dl>
+      </div>
+    </Container>
+  </section>
+
+  <section class="pb-16">
+    <Container class="space-y-8">
+      <div class="flex items-end justify-between gap-6">
+        <div class="space-y-2">
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Featured content</p>
+          <h2 class="text-3xl font-semibold text-slate-950">Published products</h2>
+        </div>
+        <a class="text-sm font-semibold text-slate-600 transition hover:text-slate-950" href="/products">
+          View all
+        </a>
+      </div>
+
+      {
+        products.length > 0 ? (
+          <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {products.slice(0, 3).map((product) => <ProductCard product={product} />)}
+          </div>
+        ) : (
+          <div class="rounded-[1.5rem] border border-dashed border-slate-300 bg-white p-8 text-slate-600">
+            No published products yet. Seed the CMS or create one in the admin panel.
+          </div>
+        )
+      }
+    </Container>
+  </section>
+</BaseLayout>
