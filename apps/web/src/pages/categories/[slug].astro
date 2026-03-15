@@ -1,24 +1,33 @@
 ---
 import Container from '@/components/layout/Container.astro'
+import { getCategories } from '@/features/categories/services/category.service'
 import ProductCard from '@/features/products/components/ProductCard.astro'
 import { getPublishedProductsByCategory } from '@/features/products/services/product.service'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 
-const slug = Astro.params.slug
+export async function getStaticPaths() {
+  const categories = await getCategories()
 
-if (!slug) {
-  return Astro.redirect('/products')
+  return Promise.all(
+    categories.map(async (category) => ({
+      params: { slug: category.slug },
+      props: {
+        category,
+        products: await getPublishedProductsByCategory(category.slug),
+      },
+    })),
+  )
 }
 
-const products = await getPublishedProductsByCategory(slug)
+const { category, products } = Astro.props
 ---
 
-<BaseLayout title={`Category: ${slug}`}>
+<BaseLayout title={`Category: ${category.name}`}>
   <section class="pb-16 pt-16 sm:pt-20">
     <Container class="space-y-8">
       <div class="space-y-3">
         <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Category view</p>
-        <h1 class="text-4xl font-semibold capitalize text-slate-950">{slug.replace(/-/g, ' ')}</h1>
+        <h1 class="text-4xl font-semibold capitalize text-slate-950">{category.name}</h1>
         <p class="max-w-2xl text-slate-600">
           Products filtered by category from the Payload relationship field.
         </p>

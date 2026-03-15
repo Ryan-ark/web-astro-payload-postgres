@@ -1,18 +1,23 @@
 ---
 import Container from '@/components/layout/Container.astro'
-import { getPublishedProductBySlug } from '@/features/products/services/product.service'
+import { getPublishedProductBySlug, getPublishedProducts } from '@/features/products/services/product.service'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 
-const slug = Astro.params.slug
+export async function getStaticPaths() {
+  const products = await getPublishedProducts()
 
-if (!slug) {
-  return Astro.redirect('/products')
+  return Promise.all(
+    products.map(async ({ slug }) => ({
+      params: { slug },
+      props: { product: await getPublishedProductBySlug(slug) },
+    })),
+  )
 }
 
-const product = await getPublishedProductBySlug(slug)
+const { product } = Astro.props
 
 if (!product) {
-  return Astro.redirect('/404')
+  throw new Error('Missing product data for a generated product page.')
 }
 ---
 
